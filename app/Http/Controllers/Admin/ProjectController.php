@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Admin\Project;
 use App\Models\Admin\Type;
+use App\Models\Admin\Technology;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -21,8 +22,10 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
+        $types = Type::all();
+        $technology = Technology::all();
 
-        return view('admin.projects.index', compact('projects'));
+        return view('admin.projects.index', compact(['projects', 'types', 'technology']));
     }
 
     /**
@@ -34,8 +37,9 @@ class ProjectController extends Controller
     {
         $project = Project::all();
         $types = Type::all();
+        $technology = Technology::all();
 
-        return view('admin.projects.create', compact(['project', 'types']));
+        return view('admin.projects.create', compact(['project', 'types', 'technology']));
     }
 
     /**
@@ -74,7 +78,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
-        return view('admin.projects.show', compact('project'));
+        
+        return view('admin.projects.show', compact(['project']));
     }
 
     /**
@@ -87,8 +92,9 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $types = Type::all();
+        $technology = Technology::all();
 
-        return view('admin.projects.edit', compact(['project', 'types']));
+        return view('admin.projects.edit', compact(['project', 'types', 'technology']));
     }
 
     /**

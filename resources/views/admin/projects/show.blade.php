@@ -153,10 +153,23 @@
     <img src="{{ asset('storage/' . $project->project_image) }}" class="img-fluid rounded-3" alt="{{ $project->title_project }} hero image">
   </div>
   <div class="container mt-5">
+
+    @if ($project->title_project)
     <h4>{{ $project->title_project }}</h4>
+    @endif
+    @if ($project->client)
     <h6><span class="text-secondary">For:</span> {{ $project->client }}</h6>
-    <p>{{ $project->description_project }}</p>
-    <p><span class="text-secondary">Type:</span> {{ $project->type->name_type }}</p>
+    @endif
+    @if ($project->description_project)
+      <p>{{ $project->description_project }}</p>
+    @endif
+    @if ($project->name_type)
+      <p><span class="text-secondary">Type:</span> {{ $project->type->name_type }}</p>
+    @endif
+
+    @foreach ($project->technologies as $elem)
+      <p><span class="text-secondary">Technology used:</span> {{ $elem->name_technology }}</p>
+    @endforeach
   </div>
 </div>
 @endsection

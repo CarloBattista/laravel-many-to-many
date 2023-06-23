@@ -134,12 +134,21 @@
             <input type="text" class="form-control" id="floatingInput" placeholder="Change client name" name="client" value="{{ $project->client }}">
             <label for="floatingInput">Client Name</label>
         </div>
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
-          <option value="">Select a type</option>
-          @foreach ($types as $typeEl)
-            <option value="{{ $typeEl->id }}" {{ old( 'type_id', $project->type_id ) == $typeEl->id ? 'selected' : '' }} >{{ $typeEl->name_type }}</option>
-          @endforeach
-        </select>
+        <div class="section d-flex gap-3">
+          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
+            <option value="">Select a type</option>
+            @foreach ($types as $typeEl)
+              <option value="{{ $typeEl->id }}" {{ old( 'type_id', $project->type_id ) == $typeEl->id ? 'selected' : '' }} >{{ $typeEl->name_type }}</option>
+            @endforeach
+          </select>
+          {{-- Per il momento non funziona la select, aggiungere delle technologie tramite phpmyadmin --}}
+          {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="technology_id">
+              <option value="">Select a technology</option>
+              @foreach ($technology as $techEl)
+                <option value="{{ $techEl->id }}" {{ old( 'technology_id', $project->technology_id ) == $typeEl->id ? 'selected' : '' }}>{{ $techEl->name_technology }}</option>
+              @endforeach
+          </select> --}}
+        </div>
         <button type="submit" class="btn btn-primary">Edit project</button>
     </form>
   </div>

@@ -133,12 +133,21 @@
             <input type="text" class="form-control" id="floatingInput" placeholder="Change client name" name="client">
             <label for="floatingInput">Client Name</label>
         </div>
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
-          <option value="">Select a type</option>
-          @foreach ($types as $typeEl)
-            <option value="{{ $typeEl->id }}">{{ $typeEl->name_type }}</option>
-          @endforeach
-        </select>
+        <div class="section d-flex gap-3">
+          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
+            <option value="">Select a type</option>
+            @foreach ($types as $typeEl)
+              <option value="{{ $typeEl->id }}">{{ $typeEl->name_type }}</option>
+            @endforeach
+          </select>
+          {{-- Per il momento non funziona la select, aggiungere delle technologie tramite phpmyadmin --}}
+          {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="technology_id">
+            <option value="">Select a technology</option>
+            @foreach ($technology as $techEl)
+              <option value="{{ $techEl->id }}">{{ $techEl->name_technology }}</option>
+            @endforeach
+          </select> --}}
+        </div>
         <button type="submit" class="btn btn-primary">Create project</button>
     </form>
   </div>
