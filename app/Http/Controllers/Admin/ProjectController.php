@@ -38,8 +38,9 @@ class ProjectController extends Controller
         $project = Project::all();
         $types = Type::all();
         $technology = Technology::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact(['project', 'types', 'technology']));
+        return view('admin.projects.create', compact(['project', 'types', 'technology', 'technologies', 'technologies']));
     }
 
     /**
@@ -50,18 +51,26 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // $project = Project::all();
+
         $form_data = $request->all();
 
         $new_Project = new Project();
 
+        // $single_project = new Project();
+        
         if ($request->hasFile('project_image')) {
-
+            
             $imagePath = Storage::disk('public')->put('project_images', $request->project_image);
-
+            
             $form_data['project_image'] = $imagePath;
         }
-
+        
         $new_Project->fill($form_data);
+        
+        if($request->has('technologies') ){
+            $new_Project->technologies()->attach($request->technologies);
+        }
 
         $new_Project->save();
 
@@ -93,8 +102,9 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $types = Type::all();
         $technology = Technology::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact(['project', 'types', 'technology']));
+        return view('admin.projects.edit', compact(['project', 'types', 'technology', 'technologies']));
     }
 
     /**
@@ -119,6 +129,10 @@ class ProjectController extends Controller
             $form_data['project_image'] = $imagePath;
         }
 
+        if($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        }
+
         $project->update($form_data);
 
         return redirect()->route('admin.projects.index');
@@ -132,6 +146,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        $project->technologies()->sync([]);
 
         if ($project->project_image) {
             Storage::delete($project->project_image);

@@ -135,12 +135,12 @@
             <label for="floatingInput">Client Name</label>
         </div>
         <div class="section d-flex gap-3">
-          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
+          {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
             <option value="">Select a type</option>
             @foreach ($types as $typeEl)
               <option value="{{ $typeEl->id }}" {{ old( 'type_id', $project->type_id ) == $typeEl->id ? 'selected' : '' }} >{{ $typeEl->name_type }}</option>
             @endforeach
-          </select>
+          </select> --}}
           {{-- Per il momento non funziona la select, aggiungere delle technologie tramite phpmyadmin --}}
           {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="technology_id">
               <option value="">Select a technology</option>
@@ -149,6 +149,17 @@
               @endforeach
           </select> --}}
         </div>
+        @foreach ($technologies as $elem)
+          <div class="form-check mb-3">
+            @if ( $errors->any() )
+              <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $elem->id }}" id="project-checkbox-{{ $elem->id }}" {{ in_array( $elem->id, old( 'technologies', [] ) ) ? 'checked' : '' }}>
+              <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">{{ $elem->name_technology }}</label>
+            @else
+              <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $elem->id }}" id="project-checkbox-{{ $elem->id }}" {{ ( $project->technologies->contains($elem) ) ? 'checked' : '' }}>
+              <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">{{ $elem->name_technology }}</label>
+            @endif
+          </div>
+        @endforeach
         <button type="submit" class="btn btn-primary">Edit project</button>
     </form>
   </div>

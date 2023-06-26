@@ -167,9 +167,17 @@
       <p><span class="text-secondary">Type:</span> {{ $project->type->name_type }}</p>
     @endif
 
-    @foreach ($project->technologies as $elem)
+    {{-- @foreach ($project->technologies as $elem)
       <p><span class="text-secondary">Technology used:</span> {{ $elem->name_technology }}</p>
-    @endforeach
+    @endforeach --}}
+
+    @if ($project->technologies)
+      <p class="text-secondary">Technology used:</p>
+      @foreach ($project->technologies as $elem)
+        <span>{{ $elem->name_technology }},</span>
+      @endforeach
+    @endif
+
   </div>
 </div>
 @endsection

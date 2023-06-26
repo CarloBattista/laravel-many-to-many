@@ -134,12 +134,12 @@
             <label for="floatingInput">Client Name</label>
         </div>
         <div class="section d-flex gap-3">
-          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
+          {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="type_id">
             <option value="">Select a type</option>
             @foreach ($types as $typeEl)
               <option value="{{ $typeEl->id }}">{{ $typeEl->name_type }}</option>
             @endforeach
-          </select>
+          </select> --}}
           {{-- Per il momento non funziona la select, aggiungere delle technologie tramite phpmyadmin --}}
           {{-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="technology_id">
             <option value="">Select a technology</option>
@@ -148,6 +148,12 @@
             @endforeach
           </select> --}}
         </div>
+        @foreach ($technologies as $elem)
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $elem->id }}" id="project-checkbox-{{ $elem->id }}">
+            <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">{{ $elem->name_technology }}</label>
+          </div>
+        @endforeach
         <button type="submit" class="btn btn-primary">Create project</button>
     </form>
   </div>
