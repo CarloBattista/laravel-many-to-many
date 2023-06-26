@@ -150,8 +150,8 @@
         </div>
         @foreach ($technologies as $elem)
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $elem->id }}" id="project-checkbox-{{ $elem->id }}">
-            <label class="form-check-label" for="project-checkbox-{{ $elem->id }}">{{ $elem->name_technology }}</label>
+            <input class="form-check-input" type="checkbox" name="technologies[]" value="{{ $elem->id }}" id="projects-checkbox-{{ $elem->id }}">
+            <label class="form-check-label" for="projects-checkbox-{{ $elem->id }}">{{ $elem->name_technology }}</label>
           </div>
         @endforeach
         <button type="submit" class="btn btn-primary">Create project</button>

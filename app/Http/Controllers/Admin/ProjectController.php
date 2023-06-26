@@ -66,7 +66,8 @@ class ProjectController extends Controller
             $form_data['project_image'] = $imagePath;
         }
         
-        $new_Project->fill($form_data);
+        // $new_Project->fill($form_data);
+        $new_Project = Project::create($form_data);
         
         if($request->has('technologies') ){
             $new_Project->technologies()->attach($request->technologies);
